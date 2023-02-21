@@ -6,233 +6,233 @@ public class Calc {
         System.out.println("Input:");
         Scanner scanner=new Scanner(System.in);
         while (true){
-        System.out.println("Output:\n "+Main.calc(scanner.next()));
+            System.out.println("Output:\n "+Main.calc(scanner.next()));
+        }
     }
-}
-class Main {
-    static int ind=0;
-    public static String calc(String input){
-        Main.ind=0;
-        String A="",B="";
-        char z='0';
-        int w=ind=0;
-        String[] symbs3={"I","II","III","IV","V","VI","VII","VIII","IX","X","L","C"};
-        char[] symbs1= {'+', '-', '*', '/'};
-        char[] inputs=input.toCharArray();
-        for (int i=0;i<inputs.length;){
-            for (int j=0;j<symbs1.length;){
-                if (inputs[i]==symbs1[j]){
-                    w++;
-                    if (w>1){Main.err8();
+    class Main {
+        static int ind=0;
+        public static String calc(String input){
+            Main.ind=0;
+            String A="",B="";
+            char z='0';
+            int w=ind=0;
+            String[] symbs3={"I","II","III","IV","V","VI","VII","VIII","IX","X","L","C"};
+            char[] symbs1= {'+', '-', '*', '/'};
+            char[] inputs=input.toCharArray();
+            for (int i=0;i<inputs.length;){
+                for (int j=0;j<symbs1.length;){
+                    if (inputs[i]==symbs1[j]){
+                        w++;
+                        if (w>1){Main.err8();
+                        }
+                        if (i==inputs.length-1){Main.err4();
+                        }
+                        if (i==0){Main.err5();
+                        }
+                        z=symbs1[j];
+                        for (int k=0;k<i;k++){
+                            A+=inputs[k];
+                        }
+                        for (int l=i+1;l<inputs.length;l++){
+                            B+=inputs[l];
+                        }
                     }
-                    if (i==inputs.length-1){Main.err4();
-                    }
-                    if (i==0){Main.err5();
-                    }
-                    z=symbs1[j];
-                    for (int k=0;k<i;k++){
-                        A+=inputs[k];
-                    }
-                    for (int l=i+1;l<inputs.length;l++){
-                        B+=inputs[l];
-                    }
-                }
-                j++;
-            }
-            i++;
-        }
-        if (z=='0'){
-            Main.err1();
-        }
-        int A1=Main.num(A,symbs3);
-        int B1=Main.num(B,symbs3);
-        if (Main.ind==1){
-            Main.err6();
-        }
-        String S=Main.rez(A1,B1,z,symbs1);
-        if (Main.ind==2){
-            S=Main.rimRez(S,symbs3);
-        }
-        return S;}
-    static void err1(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            String text="Còðîêà íå ÿâëÿåòñÿ ìàòåìàòè÷åñêîé îïåðàöèåé";
-            text+="\n èëè ïðèñóòñòâóåò ïðîáåë!";
-            System.out.println(text);
-            System.exit(0);
-        }
-        }
-    static void err2(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Ââåäåíî ÷èñëî âíå çàäàííîãî äèàïàçîíà");
-            System.exit(0);
-        }
-        }
-    static void err3(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Ââåäåíû íå ÷èñëà");
-            System.exit(0);
-        }
-        }
-    static void err4(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            String text="Íå ââåäåí âòîðîé îïåðàíä";
-            text+="\n èëè ïðèñóòñòâóåò ïðîáåë!";
-            System.out.println(text);
-            System.exit(0);
-        }
-        }
-    static void err5(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Íå ââåäåí ïåðâûé îïåðàíä");
-            System.exit(0);
-        }
-        }
-    static void err6(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Èñïîëüçóþòñÿ îäíîâðåìåííî ðàçíûå ñèñòåìû ñ÷èñëåíèÿ");
-            System.exit(0);
-        }
-        }
-    static void err7(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Â ðèìñêîé ñèñòåìå íåò îòðèöàòåëüíûõ ÷èñåë è íîëÿ");
-            System.exit(0);
-        }
-        }
-    static void err8(){
-        try {
-            throw new IOException();
-        } catch (IOException e) {
-            System.out.println("Ôîðìàò ìàòåìàòè÷åñêîé îïåðàöèè íå óäîâëåòâîðÿåò çàäàíèþ - äâà îïåðàíäà è îäèí îïåðàòîð (+, -, /, *)");
-            System.exit(0);
-        }
-        }
-    static int num(String num,String[] symbs3){
-        String Num="";
-        int q=0;
-        for (int j=0;j<symbs3.length;){
-            if (num.equals(symbs3[j])){
-                q=j+1;
-            Num+=q;
-            Main.ind++;
-            }
-            j++;
-        }
-        if (q==0){
-        int m=0;
-        char[] symbs2={'0','1','2','3','4','5','6','7','8','9'};
-        char[] nums=num.toCharArray();
-        for (int j=0;j<nums.length;){
-            for (int i=0;i<symbs2.length;){
-                if (nums[j]==symbs2[i]){
-                     Num+=nums[j];
-                     m++;
+                    j++;
                 }
                 i++;
             }
-            j++;
+            if (z=='0'){
+                Main.err1();
+            }
+            int A1=Main.num(A,symbs3);
+            int B1=Main.num(B,symbs3);
+            if (Main.ind==1){
+                Main.err6();
+            }
+            String S=Main.rez(A1,B1,z,symbs1);
+            if (Main.ind==2){
+                S=Main.rimRez(S,symbs3);
+            }
+            return S;}
+        static void err1(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                String text="CÑ‚Ñ€Ð¾ÐºÐ° Ð½Ðµ ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¼Ð°Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð¹ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸ÐµÐ¹";
+                text+="\n Ð¸Ð»Ð¸ Ð¿Ñ€Ð¸ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð¿Ñ€Ð¾Ð±ÐµÐ»!";
+                System.out.println(text);
+                System.exit(0);
+            }
         }
-        if (m!=nums.length){
-            Main.err3();}}
-        int Num1=Integer.parseInt(Num);
-        return Num1;
-}
-    static String rez(int A1,int B1,char z,char[] symbs1){
-        if (A1>10|A1<1|B1>10|B1<1){
-            Main.err2();
+        static void err2(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("Ð’Ð²ÐµÐ´ÐµÐ½Ð¾ Ñ‡Ð¸ÑÐ»Ð¾ Ð²Ð½Ðµ Ð·Ð°Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð´Ð¸Ð°Ð¿Ð°Ð·Ð¾Ð½Ð°");
+                System.exit(0);
+            }
         }
-        int S=0;
-        if (z==symbs1[0]){
-            S=A1+B1;
+        static void err3(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("Ð’Ð²ÐµÐ´ÐµÐ½Ñ‹ Ð½Ðµ Ñ‡Ð¸ÑÐ»Ð°");
+                System.exit(0);
+            }
         }
-        if (z==symbs1[1]){
-            S=A1-B1;
+        static void err4(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                String text="ÐÐµ Ð²Ð²ÐµÐ´ÐµÐ½ Ð²Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð¾Ð¿ÐµÑ€Ð°Ð½Ð´";
+                text+="\n Ð¸Ð»Ð¸ Ð¿Ñ€Ð¸ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð¿Ñ€Ð¾Ð±ÐµÐ»!";
+                System.out.println(text);
+                System.exit(0);
+            }
         }
-        if (z==symbs1[2]){
-            S=A1*B1;
+        static void err5(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("ÐÐµ Ð²Ð²ÐµÐ´ÐµÐ½ Ð¿ÐµÑ€Ð²Ñ‹Ð¹ Ð¾Ð¿ÐµÑ€Ð°Ð½Ð´");
+                System.exit(0);
+            }
         }
-        if (z==symbs1[3]){
-            S=A1/B1;
+        static void err6(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("Ð˜ÑÐ¿Ð¾Ð»ÑŒÐ·ÑƒÑŽÑ‚ÑÑ Ð¾Ð´Ð½Ð¾Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾ Ñ€Ð°Ð·Ð½Ñ‹Ðµ ÑÐ¸ÑÑ‚ÐµÐ¼Ñ‹ ÑÑ‡Ð¸ÑÐ»ÐµÐ½Ð¸Ñ");
+                System.exit(0);
+            }
         }
-        String S1=S+"";
-        return S1;
+        static void err7(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("Ð’ Ñ€Ð¸Ð¼ÑÐºÐ¾Ð¹ ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ Ð½ÐµÑ‚ Ð¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ñ… Ñ‡Ð¸ÑÐµÐ» Ð¸ Ð½Ð¾Ð»Ñ");
+                System.exit(0);
+            }
+        }
+        static void err8(){
+            try {
+                throw new IOException();
+            } catch (IOException e) {
+                System.out.println("Ð¤Ð¾Ñ€Ð¼Ð°Ñ‚ Ð¼Ð°Ñ‚ÐµÐ¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ð¹ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸ Ð½Ðµ ÑƒÐ´Ð¾Ð²Ð»ÐµÑ‚Ð²Ð¾Ñ€ÑÐµÑ‚ Ð·Ð°Ð´Ð°Ð½Ð¸ÑŽ - Ð´Ð²Ð° Ð¾Ð¿ÐµÑ€Ð°Ð½Ð´Ð° Ð¸ Ð¾Ð´Ð¸Ð½ Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€ (+, -, /, *)");
+                System.exit(0);
+            }
+        }
+        static int num(String num,String[] symbs3){
+            String Num="";
+            int q=0;
+            for (int j=0;j<symbs3.length;){
+                if (num.equals(symbs3[j])){
+                    q=j+1;
+                    Num+=q;
+                    Main.ind++;
+                }
+                j++;
+            }
+            if (q==0){
+                int m=0;
+                char[] symbs2={'0','1','2','3','4','5','6','7','8','9'};
+                char[] nums=num.toCharArray();
+                for (int j=0;j<nums.length;){
+                    for (int i=0;i<symbs2.length;){
+                        if (nums[j]==symbs2[i]){
+                            Num+=nums[j];
+                            m++;
+                        }
+                        i++;
+                    }
+                    j++;
+                }
+                if (m!=nums.length){
+                    Main.err3();}}
+            int Num1=Integer.parseInt(Num);
+            return Num1;
+        }
+        static String rez(int A1,int B1,char z,char[] symbs1){
+            if (A1>10|A1<1|B1>10|B1<1){
+                Main.err2();
+            }
+            int S=0;
+            if (z==symbs1[0]){
+                S=A1+B1;
+            }
+            if (z==symbs1[1]){
+                S=A1-B1;
+            }
+            if (z==symbs1[2]){
+                S=A1*B1;
+            }
+            if (z==symbs1[3]){
+                S=A1/B1;
+            }
+            String S1=S+"";
+            return S1;
+        }
+        static String rimRez(String S1,String[] symbs3){
+            String R="";
+            int S=Integer.parseInt(S1);
+            if (S<1){
+                Main.err7();
+            }
+            if (S==100){
+                R=symbs3[11];
+            }
+            else if (S==90){
+                R=symbs3[9]+symbs3[11];
+            }
+            else if (S>80){
+                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-81];
+            }
+            else if (S==80){
+                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9];
+            }
+            else if (S>70){
+                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[S-71];
+            }
+            else if (S==70){
+                R=symbs3[10]+symbs3[9]+symbs3[9];
+            }
+            else if (S>60){
+                R=symbs3[10]+symbs3[9]+symbs3[S-61];
+            }
+            else if (S==60){
+                R=symbs3[10]+symbs3[9];
+            }
+            else if (S>50){
+                R=symbs3[10]+symbs3[S-51];
+            }
+            else if (S==50){
+                R=symbs3[10];
+            }
+            else if (S>40)
+            {R=symbs3[9]+symbs3[10]+symbs3[S-41];
+            }
+            else if (S==40){
+                R=symbs3[9]+symbs3[10];
+            }
+            else if (S>30){
+                R=symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-31];
+            }
+            else if (S==30){
+                R=symbs3[9]+symbs3[9]+symbs3[9];
+            }
+            else if (S>20){
+                R=symbs3[9]+symbs3[9]+symbs3[S-21];
+            }
+            else if (S==20){
+                R=symbs3[9]+symbs3[9];
+            }
+            else if (S>10){
+                R=symbs3[9]+symbs3[S-11];
+            }
+            else if (S>=1){
+                R=symbs3[S-1];
+            }
+            return R;
+        }
     }
-    static String rimRez(String S1,String[] symbs3){
-        String R="";
-        int S=Integer.parseInt(S1);
-        if (S<1){
-            Main.err7();
-        }
-        if (S==100){
-            R=symbs3[11];
-        }
-        else if (S==90){
-            R=symbs3[9]+symbs3[11];
-        }
-        else if (S>80){
-            R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-81];
-        }
-        else if (S==80){
-            R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9];
-        }
-        else if (S>70){
-            R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[S-71];
-        }
-        else if (S==70){
-            R=symbs3[10]+symbs3[9]+symbs3[9];
-        }
-        else if (S>60){
-            R=symbs3[10]+symbs3[9]+symbs3[S-61];
-        }
-        else if (S==60){
-            R=symbs3[10]+symbs3[9];
-        }
-        else if (S>50){
-            R=symbs3[10]+symbs3[S-51];
-        }
-        else if (S==50){
-            R=symbs3[10];
-        }
-        else if (S>40)
-        {R=symbs3[9]+symbs3[10]+symbs3[S-41];
-        }
-        else if (S==40){
-            R=symbs3[9]+symbs3[10];
-        }
-        else if (S>30){
-            R=symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-31];
-        }
-        else if (S==30){
-            R=symbs3[9]+symbs3[9]+symbs3[9];
-        }
-        else if (S>20){
-            R=symbs3[9]+symbs3[9]+symbs3[S-21];
-        }
-        else if (S==20){
-            R=symbs3[9]+symbs3[9];
-        }
-        else if (S>10){
-            R=symbs3[9]+symbs3[S-11];
-        }
-        else if (S>=1){
-            R=symbs3[S-1];
-        }
-        return R;
-    }
-}
 }
