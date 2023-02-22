@@ -15,8 +15,9 @@ public class Calc {
             Main.ind=0;
             String A="",B="";
             char z='0';
-            int w=ind=0;
-            String[] symbs3={"I","II","III","IV","V","VI","VII","VIII","IX","X","L","C"};
+            int w=0;
+            String[] symbs4={"","X","XX","XXX","XL","L","LX","LXX","LXXX","XC","C"};
+            String[] symbs3={"","I","II","III","IV","V","VI","VII","VIII","IX","X"};
             char[] symbs1= {'+', '-', '*', '/'};
             char[] inputs=input.toCharArray();
             for (int i=0;i<inputs.length;){
@@ -51,15 +52,14 @@ public class Calc {
             }
             String S=Main.rez(A1,B1,z,symbs1);
             if (Main.ind==2){
-                S=Main.rimRez(S,symbs3);
+                S=Main.rimRez(S,symbs3,symbs4);
             }
             return S;}
         static void err1(){
             try {
                 throw new IOException();
             } catch (IOException e) {
-                String text="Cтрока не является математической операцией";
-                text+="\n или присутствует пробел!";
+                String text="Cтрока не является математической операцией или присутствует пробел!\"";
                 System.out.println(text);
                 System.exit(0);
             }
@@ -84,8 +84,7 @@ public class Calc {
             try {
                 throw new IOException();
             } catch (IOException e) {
-                String text="Не введен второй операнд";
-                text+="\n или присутствует пробел!";
+                String text="Не введен второй операнд или присутствует пробел!\"";
                 System.out.println(text);
                 System.exit(0);
             }
@@ -125,9 +124,9 @@ public class Calc {
         static int num(String num,String[] symbs3){
             String Num="";
             int q=0;
-            for (int j=0;j<symbs3.length;){
+            for (int j=1;j<symbs3.length;){
                 if (num.equals(symbs3[j])){
-                    q=j+1;
+                    q=j;
                     Num+=q;
                     Main.ind++;
                 }
@@ -148,7 +147,9 @@ public class Calc {
                     j++;
                 }
                 if (m!=nums.length){
-                    Main.err3();}}
+                    Main.err3();
+                }
+            }
             int Num1=Integer.parseInt(Num);
             return Num1;
         }
@@ -172,66 +173,12 @@ public class Calc {
             String S1=S+"";
             return S1;
         }
-        static String rimRez(String S1,String[] symbs3){
-            String R="";
-            int S=Integer.parseInt(S1);
+        static String rimRez(String S1,String[] symbs3,String[] symbs4){
+            int S=Integer.parseInt(S1),i=S/10,j=S%10;
             if (S<1){
                 Main.err7();
             }
-            if (S==100){
-                R=symbs3[11];
-            }
-            else if (S==90){
-                R=symbs3[9]+symbs3[11];
-            }
-            else if (S>80){
-                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-81];
-            }
-            else if (S==80){
-                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[9];
-            }
-            else if (S>70){
-                R=symbs3[10]+symbs3[9]+symbs3[9]+symbs3[S-71];
-            }
-            else if (S==70){
-                R=symbs3[10]+symbs3[9]+symbs3[9];
-            }
-            else if (S>60){
-                R=symbs3[10]+symbs3[9]+symbs3[S-61];
-            }
-            else if (S==60){
-                R=symbs3[10]+symbs3[9];
-            }
-            else if (S>50){
-                R=symbs3[10]+symbs3[S-51];
-            }
-            else if (S==50){
-                R=symbs3[10];
-            }
-            else if (S>40)
-            {R=symbs3[9]+symbs3[10]+symbs3[S-41];
-            }
-            else if (S==40){
-                R=symbs3[9]+symbs3[10];
-            }
-            else if (S>30){
-                R=symbs3[9]+symbs3[9]+symbs3[9]+symbs3[S-31];
-            }
-            else if (S==30){
-                R=symbs3[9]+symbs3[9]+symbs3[9];
-            }
-            else if (S>20){
-                R=symbs3[9]+symbs3[9]+symbs3[S-21];
-            }
-            else if (S==20){
-                R=symbs3[9]+symbs3[9];
-            }
-            else if (S>10){
-                R=symbs3[9]+symbs3[S-11];
-            }
-            else if (S>=1){
-                R=symbs3[S-1];
-            }
+            String R=""+symbs4[i]+symbs3[j];
             return R;
         }
     }
